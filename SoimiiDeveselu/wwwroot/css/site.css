@@ -1,31 +1,457 @@
-html {
-  font-size: 14px;
+/* STILURI GLOBALE & LAYOUT  */
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.content {
+    min-height: 500px; /* pastram spatiu pentru continut */
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+
+h2.titlu-principal {
+    color: #003366;
+    font-weight: bold;
+    border-bottom: 3px solid #66b3ff;
+    display: inline-block;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+
+/* HEADER,NAVBAR SI FOOTER */
+.header {
+    background-color: #66b3ff;
+    padding: 15px;
+    overflow: hidden;
 }
 
-body {
-  margin-bottom: 60px;
+#img-logo {
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin-right: 15px;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.header h1 {
+    color: white;
+    margin-top: 15px;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.topnav-custom {
+    background-color: #003366 !important;
+}
+
+    .topnav-custom .nav-link {
+        color: white !important;
+        font-weight: bold;
+    }
+
+        .topnav-custom .nav-link:hover {
+            color: #66b3ff !important;
+        }
+
+.footer {
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+}
+
+/* ACASA & SECTIUNI */
+#img-stadion {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.custom-section-header {
+    color: #003366 !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 15px;
+    display: block;
+}
+
+    .custom-section-header i {
+        margin-right: 10px;
+    }
+
+.description-text {
+    text-align: justify;
+    line-height: 1.7;
+    color: #333;
+    white-space: pre-line;
+}
+
+#lista-info, .custom-list {
+    list-style-type: none;
+    padding-left: 0;
+    line-height: 1.8;
+}
+
+    .custom-list i {
+        color: #003366;
+        width: 25px;
+        text-align: center;
+        margin-right: 10px;
+    }
+
+.custom-check-list {
+    list-style: none;
+    padding-left: 20px;
+}
+
+    .custom-check-list li::before {
+        content: "✓";
+        color: #003366;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+/* CLASAMENT, ISTORIE, TRANSFERURI  */
+.table-clasament {
+    background-color: #e6f2ff;
+    color: black;
+    border-color: #b3d9ff;
+}
+
+    .table-clasament th {
+        background-color: #cce6ff;
+        text-align: center;
+    }
+
+    .table-clasament td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.echipa-noastra-link {
+    color: #003366;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.tabel-transferuri thead {
+    background-color: #003366;
+    color: white;
+}
+
+.venire {
+    color: #198754;
+    font-weight: bold;
+}
+
+.plecare {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* MATCH CARDS (MECIURI & REZULTATE) */
+.result-card, .upcoming-card, .match-card-base {
+    background-color: #f0f7ff !important;
+    border-radius: 12px !important;
+    border-left: 5px solid #003366 !important;
+    margin-bottom: 20px;
+    padding: 15px;
+    transition: transform 0.2s;
+}
+
+    .match-card:hover, .match-card-base:hover {
+        transform: scale(1.02);
+    }
+
+.score-box {
+    background: #003366;
+    color: white;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.vs-box {
+    background: white;
+    color: #003366;
+    font-weight: bold;
+    border: 1px solid #003366;
+    padding: 5px 12px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.soimii-link {
+    color: #003366 !important;
+    font-weight: bold !important;
+    text-decoration: none;
+}
+
+/* FORMULARE & BUTOANE ADMIN */
+.cutie-formular {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    margin-top: 40px;
+}
+
+.btn-match-custom {
+    background-color: #003366 !important;
+    color: white !important;
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 6px;
+    border: none;
+}
+
+/* CARD JUCATOR */
+.player-card-modern {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+    .player-card-modern:hover {
+        transform: translateY(-8px);
+        border-color: #00b4ff;
+        box-shadow: 0 10px 25px rgba(0, 180, 255, 0.3) !important;
+        z-index: 5;
+    }
+
+
+.player-number-badge {
+    position: absolute;
+    top: 5px;
+    right: 12px;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: rgba(0, 51, 102, 0.6);
+    font-family: 'Arial Black', sans-serif;
+    transition: color 0.3s ease;
+}
+
+
+/* COLORARE HOVER */
+.player-card-modern:hover .player-number-badge {
+    color: rgba(0, 180, 255, 0.8);
+}
+/* Image Wrapper */
+.player-img-wrapper {
+    height: 230px;
+    background: #f8f9fa;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+    .player-img-wrapper img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+.player-info-body .btn {
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 8px;
+    transition: all 0.2s;
+}
+
+.player-card-modern:hover .btn-outline-warning {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.player-card-modern:hover .btn-outline-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* MODIFICARE PENTRU TEXT PE CARD */
+.player-name-text {
+    min-height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    color: #003366 !important;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.player-age-text {
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.player-info-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding: 12px;
+}
+
+
+
+/* MECIURI SI REZULTATE REOWORK */
+
+
+
+.text-dark-bold {
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+.score-box, .vs-box {
+    min-width: 65px;
+    text-align: center;
+}
+
+
+/* CLASAMENT REWORK */
+.table-clasament {
+    background-color: #f0f7ff !important;
+    color: black;
+    border-color: #b3d9ff;
+}
+
+    .table-clasament th {
+        background-color: #003366 !important;
+        color: white !important;
+        text-align: center;
+        font-weight: bold;
+        vertical-align: middle;
+    }
+
+    .table-clasament td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+        .table-clasament td.nume-echipa {
+            text-align: left !important;
+            padding-left: 15px !important;
+        }
+
+.text-dark-bold {
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+.echipa-noastra-link {
+    color: #003366 !important;
+    font-weight: 800 !important;
+    text-decoration: none;
+}
+
+    .echipa-noastra-link:hover {
+        text-decoration: underline !important;
+    }
+
+.linie-campioana {
+    background-color: #a3cfbb !important;
+}
+
+    .linie-campioana td {
+        color: #0a3622 !important;
+        font-weight: bold;
+    }
+
+.linie-retrogradare {
+    background-color: #f8d7da !important;
+}
+
+    .linie-retrogradare td {
+        color: #842029 !important;
+    }
+
+.linie-soimii {
+    background-color: #cce6ff !important;
+    box-shadow: inset 0 0 0 9999px rgba(0, 51, 102, 0.05);
+}
+
+.punctaj-celula {
+    font-size: 1.05rem;
+}
+
+.legenda-indicator {
+    display: inline-block;
+    width: 20px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.bg-campioana {
+    background-color: #a3cfbb !important;
+    border: 1px solid #198754;
+}
+
+.bg-retrogradare {
+    background-color: #f8d7da;
+}
+
+.bg-soimii-color {
+    background-color: #cce6ff;
+}
+
+
+/* TRANSFERURI */
+.venire {
+    color: #198754 !important;
+    font-weight: bold;
+}
+
+.plecare {
+    color: #dc3545 !important;
+    font-weight: bold;
+}
+
+
+.table-clasament td {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+/* ISTORIE */
+.titlu-istorie {
+    color: #003366 !important;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-top: 35px;
+    font-size: 1.5rem;
+    border-bottom: 1px dashed #b3d9ff;
+    padding-bottom: 5px;
+}
+
+.paragraf-istorie {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    text-align: justify;
+    color: #212529;
+    margin-bottom: 15px;
+    text-indent: 30px;
+}
+
+.list-group-item {
+    min-height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.record-title-text {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    font-weight: 800 !important;
+    color: #666 !important;
 }
