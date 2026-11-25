@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Statistici";
+    string currentSeason = ViewData["CurrentSeason"] as string;
+}
+
+<div class="container mt-5 content min-vh-100">
+    <div class="text-center mb-4">
+        <h2 class="titlu-principal">Statistici</h2>
+        <div class="underline-titlu"></div>
+    </div>
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-4 text-center">
+            <form asp-action="Index" method="get" id="seasonForm" class="mb-3">
+                <label class="form-label fw-bold small text-muted text-uppercase mb-1">Alege Sezonul</label>
+                <select id="seasonSelect" name="season" class="form-select text-center font-weight-bold" style="border: 2px solid #003366; color: #003366;">
+                    <!option value="25/26" @(currentSeason == "25/26" ? "selected" : "")>Sezonul 2025/2026</!option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        
+        <div class="col-md-6 mb-4">
+            <h3 class="custom-section-header"><i class="fas fa-shield-alt"></i> Recorduri Echipă</h3>
+            
+            <div class="list-group shadow-sm">
+                @if (ViewBag.TeamRecords != null && ((List<SoimiiDeveselu.Models.Record>)ViewBag.TeamRecords).Any())
+                {
+                    @foreach (var record in ViewBag.TeamRecords)
+                    {
+                        var tipText = record.Type.ToLower();
+    
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3" style="background-color: #f0f7ff; border-left: 5px solid #003366; margin-bottom: 8px; border-radius: 6px;">
+                            <div class="d-flex align-items-center">
+                                @if (tipText.Contains("gol") || tipText.Contains("primite"))
+                                {
+                                    <i class="fas fa-futbol me-3 text-dark" style="font-size: 1.1rem;"></i>
+                                }
+                                else if (tipText.Contains("galben"))
+                                {
+                                    <i class="fas fa-square me-3 text-warning" style="font-size: 1.2rem; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));"></i>
+                                }
+                                else if (tipText.Contains("roșu") || tipText.Contains("rosii"))
+                                {
+                                    <i class="fas fa-square me-3 text-danger" style="font-size: 1.2rem; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));"></i>
+                                }
+                                else if (tipText.Contains("spectatori") || tipText.Contains("medie"))
+                                {
+                                    <i class="fas fa-users me-3 text-secondary" style="font-size: 1.1rem;"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-chart-line me-3 text-muted" style="font-size: 1.1rem;"></i>
+                                }
+                                <span class="text-dark font-weight-bold">@record.Type</span>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="badge bg-primary px-3 py-2" style="background-color: #003366 !important; font-size: 0.9rem;">@record.Value</span>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="text-center p-4 text-muted border rounded bg-light">Nu există recorduri ale echipei înregistrate pentru acest sezon.</div>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <h3 class="custom-section-header"><i class="fas fa-users"></i> Recorduri Individuale</h3>
+            
+            <div class="list-group shadow-sm">
+                @if (ViewBag.PlayerRecords != null && ((List<SoimiiDeveselu.Models.Record>)ViewBag.PlayerRecords).Any())
+                {
+                    @foreach (var record in ViewBag.PlayerRecords)
+                    {
+                        var tipText = record.Type.ToLower();
+    
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3" style="background-color: #f0f7ff; border-left: 5px solid #003366; margin-bottom: 8px; border-radius: 6px;">
+                            <div class="d-flex align-items-center">
+                                @if (tipText.Contains("gol"))
+                                {
+                                    <i class="fas fa-futbol me-3 text-dark" style="font-size: 1.1rem;"></i>
+                                }
+                                else if (tipText.Contains("asist") || tipText.Contains("assist"))
+                                {
+                                    <i class="fas fa-shoe-prints me-3 text-info" style="font-size: 1.1rem; transform: rotate(-45deg); display: inline-block;"></i>
+                                }
+                                else if (tipText.Contains("galben"))
+                                {
+                                    <i class="fas fa-square me-3 text-warning" style="font-size: 1.2rem; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));"></i>
+                                }
+                                else if (tipText.Contains("roșu") || tipText.Contains("rosii"))
+                                {
+                                    <i class="fas fa-square me-3 text-danger" style="font-size: 1.2rem; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));"></i>
+                                }
+                                else if (tipText.Contains("omul") || tipText.Contains("meciului"))
+                                {
+                                    <i class="fas fa-star me-3 text-warning" style="font-size: 1.1rem;"></i>
+                                }
+                                else if (tipText.Contains("minute") || tipText.Contains("timp"))
+                                {
+                                    <i class="far fa-clock me-3 text-primary" style="font-size: 1.1rem;"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-trophy me-3 text-warning" style="font-size: 1.1rem;"></i>
+                                }
+                                <div>
+                                    <span class="small text-uppercase d-block record-title-text">@record.Type</span>
+                                    <span class="text-dark-bold" style="font-size: 1rem;">@(record.Player?.Name ?? "N/A")</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="badge px-3 py-2" style="background-color: #cce6ff; color: #003366; font-size: 0.9rem; font-weight: bold; border: 1px solid #b3d9ff;">@record.Value</span>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="text-center p-4 text-muted border rounded bg-light">Nu există recorduri individuale înregistrate pentru acest sezon.</div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
