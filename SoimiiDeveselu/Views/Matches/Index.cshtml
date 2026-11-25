@@ -1,0 +1,110 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Rezultate & Meciuri";
+}
+
+<div class="container mt-4 min-vh-100">
+    <div class="text-center mb-5">
+        <h2 class="titlu-principal">Rezultate & Program</h2>
+        <div class="underline-titlu"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <h3 class="custom-section-header"><i class="fas fa-trophy"></i> Ultimele Rezultate</h3>
+            
+            @foreach (var item in ViewBag.PastMatches)
+            {
+                <div class="card match-card-base result-card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between small text-muted mb-3">
+                            <span><i class="far fa-calendar-check me-1"></i> @item.MatchDate.ToString("dd.MM.yyyy HH:mm")</span>
+                            <span class="fw-bold text-dark-bold">Etapa @item.Round</span>
+                        </div>
+
+                        <div class="row align-items-center text-center my-3">
+                            <div class="col-5">
+                                @if (item.HomeTeam.Contains("Soimii") || item.HomeTeam.Contains("Șoimii"))
+                                {
+                                    <a asp-controller="Home" asp-action="Index" class="soimii-link">@item.HomeTeam</a>
+                                }
+                                else
+                                {
+
+                                    <span class="text-dark-bold">@item.HomeTeam</span>
+                                }
+                            </div>
+                            <div class="col-2 px-0 d-flex justify-content-center">
+                                <div class="score-box shadow-sm">@item.HomeScore - @item.AwayScore</div>
+                            </div>
+                            <div class="col-5">
+                                @if (item.AwayTeam.Contains("Soimii") || item.AwayTeam.Contains("Șoimii"))
+                                {
+                                    <a asp-controller="Home" asp-action="Index" class="soimii-link">@item.AwayTeam</a>
+                                }
+                                else
+                                {
+
+                                    <span class="text-dark-bold">@item.AwayTeam</span>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-3 small text-muted">
+                            <i class="fas fa-map-marker-alt me-1"></i> <strong>Locație:</strong> @item.Location
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <h3 class="custom-section-header"><i class="far fa-calendar-alt"></i> Program Competitonal</h3>
+            
+            @foreach (var item in ViewBag.UpcomingMatches)
+            {
+                <div class="card match-card-base upcoming-card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between small text-muted mb-3">
+                            <span><i class="far fa-calendar-alt me-1"></i> @item.MatchDate.ToString("dd.MM.yyyy HH:mm")</span>
+                            <span class="fw-bold text-dark-bold">Etapa @item.Round</span>
+                        </div>
+
+                        <div class="row align-items-center text-center my-3">
+                            <div class="col-5">
+                                @if (item.HomeTeam.Contains("Soimii") || item.HomeTeam.Contains("Șoimii"))
+                                {
+                                    <a asp-controller="Home" asp-action="Index" class="soimii-link">@item.HomeTeam</a>
+                                }
+                                else
+                                {
+
+                                    <span class="text-dark-bold">@item.HomeTeam</span>
+                                }
+                            </div>
+                            <div class="col-2 px-0 d-flex justify-content-center">
+                                <div class="vs-box shadow-sm">VS</div>
+                            </div>
+                            <div class="col-5">
+                                @if (item.AwayTeam.Contains("Soimii") || item.AwayTeam.Contains("Șoimii"))
+                                {
+                                    <a asp-controller="Home" asp-action="Index" class="soimii-link">@item.AwayTeam</a>
+                                }
+                                else
+                                {
+
+                                    <span class="text-dark-bold">@item.AwayTeam</span>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-3 small text-muted">
+                            <i class="fas fa-map-marker-alt me-1"></i> <strong>Locație:</strong> @item.Location
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
