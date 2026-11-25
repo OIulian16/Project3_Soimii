@@ -1,0 +1,79 @@
+﻿@model IEnumerable<SoimiiDeveselu.Models.Player>
+
+@{
+    ViewData["Title"] = "Lot Jucatori";
+}
+
+<div class="container mt-4 players-container">
+    <div class="text-center mb-5">
+        <h2 style="color: #003366; font-weight: bold; border-bottom: 3px solid #003366; display: inline-block; padding-bottom: 10px;">
+            @((bool)ViewData["ShowInactive"] ? "Jucători Inactivi / Istoric" : "Lot Jucători - Sezon 2026/2027")
+        </h2>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-7">
+        </div>
+        <div class="col-md-5">
+            <form asp-action="Index" method="get" class="d-flex shadow-sm">
+                <input type="hidden" name="showInactive" value="@ViewData["ShowInactive"].ToString().ToLower()" />
+                <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Caută după nume...">
+                <button type="submit" class="btn btn-primary">Caută</button>
+            </form>
+        </div>
+    </div>
+
+    @{
+        var categorii = new[] { "Portar", "Fundaș", "Mijlocaș", "Atacant" };
+    }
+
+    @foreach (var cat in categorii)
+    {
+        var jucatoriDinCategorie = Model.Where(p => p.Position == cat).ToList();
+
+        if (jucatoriDinCategorie.Any())
+        {
+            <div class="row mt-5">
+                <div class="col-12">
+                    @{
+                        string titluPlural = cat switch
+                        {
+                            "Portar" => "Portari",
+                            "Fundaș" => "Fundași",
+                            "Mijlocaș" => "Mijlocași",
+                            "Atacant" => "Atacanți",
+                            _ => cat
+                        };
+                    }
+                    <h3 class="custom-section-header">@titluPlural.ToUpper()</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                @foreach (var item in jucatoriDinCategorie)
+                {
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-4">
+                        <div class="player-card-modern shadow">
+                            <div class="player-img-wrapper">
+                                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                {
+                                    <img src="@item.ImageUrl" alt="@item.Name">
+                                }
+                                else
+                                {
+                                    <div class="no-photo">Fără Poză</div>
+                                }
+                                <div class="player-number-badge">@item.Number</div>
+                            </div>
+
+                            <div class="player-info-body text-center">
+                                <h6 class="player-name-text mt-2">@item.Name.ToUpper()</h6>
+                                <p class="player-age-text">@item.Age ani</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>
